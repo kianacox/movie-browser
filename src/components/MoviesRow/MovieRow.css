@@ -1,0 +1,71 @@
+
+  
+  .movie-row-title {
+    font-size: 1.5rem;
+    margin: 0 0 12px 0;
+    text-align: left;
+  }
+  
+  .movie-row {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+  
+  .movie-row-items {
+    display: flex;
+    gap: 16px;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+  }
+  
+  .movie-card {
+    flex: 0 0 auto;
+    width: 160px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 8px;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    /* border-radius: 8px; */
+  }
+  
+  .movie-card-poster {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .movie-card-title {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    white-space: normal;
+  }
+  
+  .movie-row::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .movie-row {
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;     /* Firefox */
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+  }
+  
+  .movie-row-items {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+  }
+  
+  .movie-card {
+    scroll-snap-align: start;
+  }
+  
