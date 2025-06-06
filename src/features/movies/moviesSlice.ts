@@ -37,10 +37,9 @@ export const moviesSlice = createSlice({
     })
 
     builder.addCase(fetchMovieDetails.fulfilled, (state, action) => {
-      const { data } = action.payload
-      const movieId = data.id
+      const { id, runtime, vote_average, vote_count } = action.payload.data
+      const movieId = id
 
-      // Update movie in all categories if it exists
       const categories: MovieCategory[] = [
         "popular",
         "top_rated",
@@ -50,7 +49,7 @@ export const moviesSlice = createSlice({
       categories.forEach(category => {
         const movie = state[category].find(movie => movie.id === movieId)
         if (movie) {
-          Object.assign(movie, data)
+          Object.assign(movie, { runtime, vote_average, vote_count })
         }
       })
 
@@ -93,4 +92,4 @@ export const moviesSlice = createSlice({
   },
 })
 
-export default moviesSlice.reducer
+export const moviesReducer = moviesSlice.reducer

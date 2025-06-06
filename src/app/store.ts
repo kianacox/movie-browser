@@ -1,6 +1,6 @@
+import { moviesReducer } from "../features/movies/moviesSlice"
 import { configureStore } from "@reduxjs/toolkit"
-import moviesReducer from "../features/movies/moviesSlice"
-import historyReducer from "../features/history/historySlice"
+import { historyReducer } from "../features/history/historySlice"
 
 export const store = configureStore({
   reducer: {

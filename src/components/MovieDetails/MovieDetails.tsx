@@ -6,6 +6,8 @@ import {
   fetchMovieWatchProviders,
 } from "../../features/movies/moviesThunks"
 import "./MovieDetails.css"
+import { Loading } from "../Loading/Loading"
+import { Error } from "./Error/Error"
 
 export const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -13,8 +15,6 @@ export const MovieDetails: React.FC = () => {
   const dispatch = useAppDispatch()
   const { status, error } = useAppSelector(state => state.movies)
 
-  console.log(useAppSelector(state => state))
-  // Find the movie in any category
   const movie = useAppSelector(state => {
     const categories = [
       "popular",
@@ -22,29 +22,30 @@ export const MovieDetails: React.FC = () => {
       "upcoming",
       "now_playing",
     ] as const
+
     for (const category of categories) {
-      const found = state.movies[category].find(m => m.id.toString() === id)
-      if (found) return found
+      const found = state.movies[category].find(
+        movie => movie.id.toString() === id,
+      )
+      if (found) return found // return the first movie that matches the id
     }
     return null
   })
 
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchMovieDetails(id))
-    }
-  }, [dispatch, id])
+  console.log("movie", movie)
 
   useEffect(() => {
     if (id) {
+      dispatch(fetchMovieDetails(id))
       dispatch(fetchMovieWatchProviders(id))
     }
   }, [id, dispatch])
 
-  if (status === "loading")
-    return <div className="movie-details-loading">Loading...</div>
-  if (status === "failed")
-    return <div className="movie-details-error">{error}</div>
+  if (status === "loading") return <Loading />
+  if (error || status === "failed") {
+    console.log("error state hit")
+    return <Error message={error?.toString() || "movie details not found"} />
+  }
   if (!movie) return null
 
   const {
@@ -54,9 +55,12 @@ export const MovieDetails: React.FC = () => {
     release_date,
     runtime,
     watchProviders,
+    vote_average,
+    vote_count,
   } = movie
 
   const hasProviders = !!watchProviders?.GB?.flatrate
+  const convertedVoteAverage = vote_average?.toFixed(1)
 
   return (
     <main className="movie-details-container">
@@ -81,11 +85,17 @@ export const MovieDetails: React.FC = () => {
           <p className="movie-details-meta">
             <strong>Runtime:</strong> {runtime} mins
           </p>
+          <p className="movie-details-meta">
+            <strong>Vote Average:</strong> {convertedVoteAverage}
+          </p>
+          <p className="movie-details-meta">
+            <strong>Vote Count:</strong> {vote_count}
+          </p>
           {hasProviders && (
             <article className="movie-providers">
               <h2 className="movie-providers-title">Watch Providers</h2>
               <ul className="movie-providers-list">
-                {watchProviders?.GB?.flatrate?.map(provider => (
+                {watchProviders.GB.flatrate.map(provider => (
                   <li key={provider.provider_id}>
                     <img
                       className="movie-provider-logo"

@@ -14,4 +14,4 @@ const historySlice = createSlice({
   },
 })
 
-export default historySlice.reducer
+export const historyReducer = historySlice.reducer

@@ -14,7 +14,6 @@ export const Home: React.FC = () => {
   const dispatch = useAppDispatch()
   const movies = useAppSelector(state => state.movies)
 
-  console.log(useAppSelector(state => state))
   useEffect(() => {
     categories.forEach(({ key }) => dispatch(fetchMovies(key)))
   }, [dispatch])

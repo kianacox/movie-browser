@@ -1,27 +1,113 @@
-# vite-template-redux
+# Movie Browser
 
-Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
+A modern web application for browsing and discovering movies, built with React and Redux Toolkit.
 
-```sh
-npx tiged reduxjs/redux-templates/packages/vite-template-redux my-app
+## Overview
+
+Movie Browser is a responsive web application that allows users to:
+
+- Browse movies by different categories (Popular, Top Rated, Upcoming, Now Playing)
+- View detailed information about each movie
+- See where movies are available to watch
+- Track their viewing history
+
+## Technologies
+
+- **Frontend Framework**: React 19
+- **State Management**: Redux Toolkit
+- **Routing**: React Router v7
+- **Styling**: Custom CSS
+- **API Integration**: Axios
+- **Testing**: Vitest, React Testing Library
+- **Build Tool**: Vite
+- **Language**: TypeScript
+
+## Prerequisites
+
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+
+## Setup
+
+1. Clone the repository:
+
+```bash
+git clone [repository-url]
+cd movie-browser
 ```
 
-## Goals
+2. Install dependencies:
 
-- Easy migration from Create React App or Vite
-- As beginner friendly as Create React App
-- Optimized performance compared to Create React App
-- Customizable without ejecting
+```bash
+npm install
+```
 
-## Scripts
+3. Start the development server:
 
-- `dev`/`start` - start dev server and open browser
-- `build` - build for production
-- `preview` - locally preview production build
-- `test` - launch test runner
+```bash
+npm run dev
+```
 
-## Inspiration
+The application will be available at `http://localhost:5173`
 
-- [Create React App](https://github.com/facebook/create-react-app/tree/main/packages/cra-template)
-- [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react)
-- [Vitest](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run test` - Run tests in watch mode
+- `npm run test:coverage` - Run tests with coverage report
+- `npm run test:coverage:report` - Generate HTML coverage report
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors
+- `npm run format` - Format code with Prettier
+- `npm run type-check` - Run TypeScript type checking
+
+## Testing
+
+The project uses Vitest and React Testing Library for testing. Tests are located alongside the components they test with the `.test.tsx` extension.
+
+### Running Tests
+
+```bash
+# Run tests in watch mode
+npm run test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Generate HTML coverage report
+npm run test:coverage:report
+```
+
+### Test Coverage
+
+The coverage report will show:
+
+- Line coverage
+- Branch coverage
+- Function coverage
+- File-by-file breakdown
+
+Coverage reports are generated in the `coverage` directory. Open `coverage/index.html` in your browser to view the detailed HTML report.
+
+## Project Structure
+
+src/
+├── app/ # Redux store configuration
+├── components/ # React components
+├── features/ # Redux slices and thunks
+├── pages/ # Page components
+├── test/ # Test utilities and mocks
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
