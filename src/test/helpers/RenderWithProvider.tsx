@@ -6,6 +6,9 @@ import { MemoryRouter } from "react-router-dom"
 import { HistoryState } from "../../features/history/types"
 import { historyReducer } from "../../features/history/historySlice"
 
+//create a mock reducer that preserves the preloaded state
+const mockMoviesReducer = (state = defaultMoviesState) => state
+
 const defaultMoviesState: MoviesState = {
   popular: [],
   top_rated: [],
@@ -36,7 +39,7 @@ const createMockStore = (
 
   return configureStore({
     reducer: {
-      movies: (state = preloadedState.movies) => state,
+      movies: mockMoviesReducer,
       history: historyReducer,
     },
     preloadedState,

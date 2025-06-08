@@ -1,13 +1,17 @@
-import { StrictMode } from "react"
+import { Suspense, lazy, StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
+import { PersistGate } from "redux-persist/integration/react"
 import { App } from "./App"
-import { store } from "./app/store"
+import { store, persistor } from "./app/store"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { MovieDetails } from "./components/MovieDetails/MovieDetails"
 import "./index.css"
+import { Loading } from "./components/Loading/Loading"
 
 const container = document.getElementById("root")
+const MovieDetails = lazy(
+  () => import("./components/MovieDetails/MovieDetails"),
+)
 
 if (container) {
   const root = createRoot(container)
@@ -15,12 +19,16 @@ if (container) {
   root.render(
     <StrictMode>
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/details/:id" element={<MovieDetails />} />
-          </Routes>
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/details/:id" element={<MovieDetails />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     </StrictMode>,
   )

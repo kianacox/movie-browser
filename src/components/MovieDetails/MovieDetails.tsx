@@ -15,6 +15,13 @@ export const MovieDetails: React.FC = () => {
   const dispatch = useAppDispatch()
   const { status, error } = useAppSelector(state => state.movies)
 
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchMovieDetails(id))
+      dispatch(fetchMovieWatchProviders(id))
+    }
+  }, [id, dispatch])
+
   const movie = useAppSelector(state => {
     const categories = [
       "popular",
@@ -32,18 +39,8 @@ export const MovieDetails: React.FC = () => {
     return null
   })
 
-  console.log("movie", movie)
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchMovieDetails(id))
-      dispatch(fetchMovieWatchProviders(id))
-    }
-  }, [id, dispatch])
-
   if (status === "loading") return <Loading />
   if (error || status === "failed") {
-    console.log("error state hit")
     return <Error message={error?.toString() || "movie details not found"} />
   }
   if (!movie) return null
@@ -113,3 +110,5 @@ export const MovieDetails: React.FC = () => {
     </main>
   )
 }
+
+export default MovieDetails

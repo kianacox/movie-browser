@@ -25,3 +25,22 @@ dist-ssr
 
 .yalc/
 yalc.lock
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+/html
+
+# production
+/build
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.cursor
