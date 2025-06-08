@@ -1,8 +1,8 @@
-import "./MovieRow.css"
+import "./CategoriesRow.css"
 import React from "react"
 import { Movie } from "../../features/movies/types"
 import { Link } from "react-router-dom"
-import { addToHistory } from "../../features/history/historyActions"
+import { addToHistory } from "../../features/history/historySlice"
 import { useAppDispatch } from "../../app/hooks"
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   movies: Movie[]
 }
 
-export const MovieRow: React.FC<Props> = ({ title, movies }) => {
+export const CategoriesRow: React.FC<Props> = ({ title, movies }) => {
   const dispatch = useAppDispatch()
   return (
     <section>

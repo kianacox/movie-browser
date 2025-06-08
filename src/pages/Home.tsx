@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { fetchMovies } from "../features/movies/moviesThunks"
-import { MovieRow } from "../components/MoviesRow/MovieRow"
+import { CategoriesRow } from "../components/CategoriesRow/CategoriesRow"
+import { HistoryRow } from "../components/HistoryRow/HistoryRow"
 
 const categories = [
   { key: "popular", title: "Popular" },
@@ -13,6 +14,7 @@ const categories = [
 export const Home: React.FC = () => {
   const dispatch = useAppDispatch()
   const movies = useAppSelector(state => state.movies)
+  const history = useAppSelector(state => state.history)
 
   useEffect(() => {
     categories.forEach(({ key }) => dispatch(fetchMovies(key)))
@@ -21,8 +23,9 @@ export const Home: React.FC = () => {
   return (
     <div className="home-page">
       <h1 className="home-page__title">Movie Browser</h1>
+      <HistoryRow history={history} />
       {categories.map(({ key, title }) => (
-        <MovieRow key={key} title={title} movies={movies[key] || []} />
+        <CategoriesRow key={key} title={title} movies={movies[key] || []} />
       ))}
     </div>
   )

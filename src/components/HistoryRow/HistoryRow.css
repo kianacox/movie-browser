@@ -1,0 +1,74 @@
+.history-row {
+  position: relative;
+  margin: 0 0 32px 0;
+  padding: 32px 40px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.history-row-title {
+  font-size: 2rem;
+  margin: 0 0 20px 0;
+  text-align: left;
+  color: #fff;
+}
+
+.history-row-items {
+  display: flex;
+  gap: 24px;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+}
+
+.history-row::-webkit-scrollbar {
+  display: none;
+}
+
+.history-row {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+  scroll-snap-type: x mandatory;
+}
+
+.history-card {
+  flex: 0 0 auto;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px;
+  scroll-snap-align: start;
+}
+
+.history-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.history-card-poster {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.history-card-title {
+  margin-top: 12px;
+  font-size: 1rem;
+  white-space: normal;
+  color: #fff;
+}
+/* align clear history button to the left of the history row */
+.clear-history-button {
+  
+  margin: 10px 20px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
