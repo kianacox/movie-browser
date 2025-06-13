@@ -34,7 +34,7 @@ export const MovieDetails: React.FC = () => {
       const found = state.movies[category].find(
         movie => movie.id.toString() === id,
       )
-      if (found) return found // return the first movie that matches the id
+      if (found) return found
     }
     return null
   })
@@ -43,7 +43,7 @@ export const MovieDetails: React.FC = () => {
   if (error || status === "failed") {
     return <Error message={error?.toString() || "movie details not found"} />
   }
-  if (!movie) return null
+  if (!movie) return <Error message={"movie details not found"} />
 
   const {
     title,
@@ -56,7 +56,8 @@ export const MovieDetails: React.FC = () => {
     vote_count,
   } = movie
 
-  const hasProviders = !!watchProviders?.GB?.flatrate
+  const gbProviders = watchProviders?.results?.["GB"]
+  const hasProviders = !!gbProviders?.flatrate
   const convertedVoteAverage = vote_average?.toFixed(1)
 
   return (
@@ -92,7 +93,7 @@ export const MovieDetails: React.FC = () => {
             <article className="movie-providers">
               <h2 className="movie-providers-title">Watch Providers</h2>
               <ul className="movie-providers-list">
-                {watchProviders.GB.flatrate.map(provider => (
+                {gbProviders?.flatrate?.map(provider => (
                   <li key={provider.provider_id}>
                     <img
                       className="movie-provider-logo"

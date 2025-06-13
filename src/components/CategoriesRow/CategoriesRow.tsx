@@ -1,6 +1,6 @@
 import "./CategoriesRow.css"
 import React from "react"
-import { Movie } from "../../features/movies/types"
+import { Movie } from "../../types/movie"
 import { Link } from "react-router-dom"
 import { addToHistory } from "../../features/history/historySlice"
 import { useAppDispatch } from "../../app/hooks"

@@ -1,4 +1,4 @@
-import { Movie } from "../movies/types"
+import { Movie } from "../../types/movie"
 
 export interface HistoryState {
   history: Movie[]

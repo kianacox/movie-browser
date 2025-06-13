@@ -1,4 +1,4 @@
-import { Movie } from "../../features/movies/types"
+import { Movie } from "../../types/movie"
 
 export const mockMovie: Movie = {
   id: 123,

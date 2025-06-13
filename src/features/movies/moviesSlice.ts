@@ -4,7 +4,8 @@ import {
   fetchMovieDetails,
   fetchMovieWatchProviders,
 } from "./moviesThunks"
-import { MoviesState, MovieCategory } from "./types"
+import { MovieCategory } from "../../types/movie"
+import { MoviesState } from "./types"
 
 const initialState: MoviesState = {
   popular: [],
@@ -67,7 +68,7 @@ export const moviesSlice = createSlice({
 
     builder.addCase(fetchMovieWatchProviders.fulfilled, (state, action) => {
       const { data } = action.payload
-      const movieId = parseInt(data.id)
+      const movieId = data.id
 
       const categories: MovieCategory[] = [
         "popular",
@@ -78,7 +79,7 @@ export const moviesSlice = createSlice({
       categories.forEach(category => {
         const movie = state[category].find(movie => movie.id === movieId)
         if (movie) {
-          movie.watchProviders = data.results
+          movie.watchProviders = data
         }
       })
 
