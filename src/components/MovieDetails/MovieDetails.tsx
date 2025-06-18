@@ -61,7 +61,8 @@ export const MovieDetails: React.FC = () => {
     vote_count,
   } = movie
 
-  const providers: WatchProvider[] = watchProviders?.results.GB.flatrate ?? []
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  const providers: WatchProvider[] = watchProviders?.results?.GB?.flatrate ?? []
 
   const convertedVoteAverage = vote_average?.toFixed(1)
 
