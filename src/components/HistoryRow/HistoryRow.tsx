@@ -1,11 +1,11 @@
 import "./HistoryRow.css"
-import React from "react"
-import { HistoryState } from "../../features/history/types"
+import type React from "react"
+import type { HistoryState } from "../../features/history/types"
 import { Link } from "react-router-dom"
 import { addToHistory, clearHistory } from "../../features/history/historySlice"
 import { useAppDispatch } from "../../app/hooks"
 
-interface Props {
+type Props = {
   history: HistoryState
 }
 

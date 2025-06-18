@@ -1,12 +1,13 @@
 import { render } from "@testing-library/react"
 import { Provider } from "react-redux"
 import { configureStore } from "@reduxjs/toolkit"
-import { MoviesState } from "../../features/movies/types"
+import type { MoviesState } from "../../features/movies/types"
 import { MemoryRouter } from "react-router-dom"
-import { HistoryState } from "../../features/history/types"
+import type { HistoryState } from "../../features/history/types"
 import { historyReducer } from "../../features/history/historySlice"
+import type { FavouritesState } from "../../features/favourites/types"
+import { favouritesReducer } from "../../features/favourites/favouritesSlice"
 
-//create a mock reducer that preserves the preloaded state
 const mockMoviesReducer = (state = defaultMoviesState) => state
 
 const defaultMoviesState: MoviesState = {
@@ -14,26 +15,47 @@ const defaultMoviesState: MoviesState = {
   top_rated: [],
   upcoming: [],
   now_playing: [],
-  status: "idle",
-  error: null,
+  requests: {
+    fetchMovies: {
+      status: "idle",
+      error: null,
+    },
+    fetchMovieDetails: {
+      status: "idle",
+      error: null,
+    },
+    fetchMovieWatchProviders: {
+      status: "idle",
+      error: null,
+    },
+  },
 }
 
 const defaultHistoryState: HistoryState = {
   history: [],
 }
 
+const defaultFavouritesState: FavouritesState = {
+  favourites: [],
+}
+
 const createMockStore = (
-  initialState: Partial<MoviesState> = {},
+  moviesState: Partial<MoviesState> = {},
   historyState: Partial<HistoryState> = {},
+  favouritesState: Partial<FavouritesState> = {},
 ) => {
   const preloadedState = {
     movies: {
       ...defaultMoviesState,
-      ...initialState,
+      ...moviesState,
     },
     history: {
       ...defaultHistoryState,
       ...historyState,
+    },
+    favourites: {
+      ...defaultFavouritesState,
+      ...favouritesState,
     },
   }
 
@@ -41,6 +63,7 @@ const createMockStore = (
     reducer: {
       movies: mockMoviesReducer,
       history: historyReducer,
+      favourites: favouritesReducer,
     },
     preloadedState,
   })
@@ -48,10 +71,12 @@ const createMockStore = (
 
 export const renderWithProviders = (
   ui: React.ReactElement,
-  initialState: Partial<MoviesState> = {},
+  moviesState: Partial<MoviesState> = {},
+  historyState: Partial<HistoryState> = {},
+  favouritesState: Partial<FavouritesState> = {},
   { route = "/" } = {},
 ) => {
-  const store = createMockStore(initialState)
+  const store = createMockStore(moviesState, historyState, favouritesState)
   return {
     ...render(
       <Provider store={store}>

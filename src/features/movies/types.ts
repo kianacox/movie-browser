@@ -1,10 +1,20 @@
-import { Movie } from "../../types/movie"
+import type { Movie } from "../../types/movie"
 
-export interface MoviesState {
+type RequestStatus = "idle" | "loading" | "succeeded" | "failed"
+
+type RequestState = {
+  status: RequestStatus
+  error: string | null
+}
+
+export type MoviesState = {
   popular: Movie[]
   top_rated: Movie[]
   upcoming: Movie[]
   now_playing: Movie[]
-  status: "idle" | "loading" | "succeeded" | "failed"
-  error: string | null
+  requests: {
+    fetchMovies: RequestState
+    fetchMovieDetails: RequestState
+    fetchMovieWatchProviders: RequestState
+  }
 }

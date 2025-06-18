@@ -1,4 +1,5 @@
-import React, { useEffect } from "react"
+import type React from "react"
+import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { fetchMovies } from "../features/movies/moviesThunks"
 import { CategoriesRow } from "../components/CategoriesRow/CategoriesRow"
@@ -22,7 +23,6 @@ export const Home: React.FC = () => {
 
   return (
     <div className="home-page">
-      <h1 className="home-page__title">Movie Browser</h1>
       <HistoryRow history={history} />
       {categories.map(({ key, title }) => (
         <CategoriesRow key={key} title={title} movies={movies[key] || []} />

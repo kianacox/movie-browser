@@ -1,4 +1,4 @@
-import React from "react"
+import type React from "react"
 import "./Loading.css"
 import { FaSpinner } from "react-icons/fa"
 

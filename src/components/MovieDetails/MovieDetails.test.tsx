@@ -1,19 +1,12 @@
-import { describe, test, expect, beforeEach, afterEach } from "vitest"
-import { screen, cleanup } from "@testing-library/react"
+import { describe, test, expect } from "vitest"
+import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { MovieDetails } from "./MovieDetails"
 import { renderWithProviders } from "../../test/helpers/RenderWithProvider"
 import { mockMovie } from "../../test/mocks/Movie"
+import { MOVIE_POSTER_BASE_URL_300 } from "../../constants/MovieConsts"
 
 describe("MovieDetails", () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-  })
-
-  afterEach(() => {
-    cleanup()
-  })
-
   vi.mock("react-router-dom", async () => {
     const actual =
       await vi.importActual<typeof import("react-router-dom")>(
@@ -27,15 +20,60 @@ describe("MovieDetails", () => {
 
   test("shows loading spinner while content is loading", () => {
     renderWithProviders(<MovieDetails />, {
-      status: "loading",
+      requests: {
+        fetchMovieDetails: {
+          status: "loading",
+          error: null,
+        },
+        fetchMovies: {
+          status: "idle",
+          error: null,
+        },
+        fetchMovieWatchProviders: {
+          status: "idle",
+          error: null,
+        },
+      },
     })
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument()
   })
 
-  test("shows error message when content fails to load", () => {
+  test("shows error message when content fails to load and state.error is null", () => {
     renderWithProviders(<MovieDetails />, {
-      status: "failed",
-      error: "Test error message",
+      requests: {
+        fetchMovieDetails: {
+          status: "failed",
+          error: null,
+        },
+        fetchMovies: {
+          status: "idle",
+          error: null,
+        },
+        fetchMovieWatchProviders: {
+          status: "idle",
+          error: null,
+        },
+      },
+    })
+    expect(screen.getByText("Movie details not found")).toBeInTheDocument()
+  })
+
+  test("shows error message when content fails to load and state.error is not null", () => {
+    renderWithProviders(<MovieDetails />, {
+      requests: {
+        fetchMovieDetails: {
+          status: "failed",
+          error: "Test error message",
+        },
+        fetchMovies: {
+          status: "idle",
+          error: null,
+        },
+        fetchMovieWatchProviders: {
+          status: "idle",
+          error: null,
+        },
+      },
     })
     expect(screen.getByText("Test error message")).toBeInTheDocument()
   })
@@ -46,8 +84,24 @@ describe("MovieDetails", () => {
       <MovieDetails />,
       {
         popular: [mockMovie],
-        status: "succeeded",
+        requests: {
+          fetchMovieDetails: {
+            status: "succeeded",
+            error: null,
+          },
+
+          fetchMovies: {
+            status: "idle",
+            error: null,
+          },
+          fetchMovieWatchProviders: {
+            status: "idle",
+            error: null,
+          },
+        },
       },
+      {},
+      {},
       { route: `/movie/${mockMovie.id}` },
     )
 
@@ -59,21 +113,48 @@ describe("MovieDetails", () => {
   test("displays movie details when content is loaded", () => {
     renderWithProviders(<MovieDetails />, {
       popular: [mockMovie],
-      status: "succeeded",
+      requests: {
+        fetchMovieDetails: {
+          status: "succeeded",
+          error: null,
+        },
+
+        fetchMovies: {
+          status: "idle",
+          error: null,
+        },
+        fetchMovieWatchProviders: {
+          status: "idle",
+          error: null,
+        },
+      },
     })
 
     expect(screen.getByText(mockMovie.title)).toBeInTheDocument()
     expect(screen.getByText(mockMovie.overview)).toBeInTheDocument()
-    expect(screen.getByText(/Release Date:/)).toBeInTheDocument()
-    expect(screen.getByText(/Runtime:/)).toBeInTheDocument()
-    expect(screen.getByText(/Vote Average:/)).toBeInTheDocument()
-    expect(screen.getByText(/Vote Count:/)).toBeInTheDocument()
+    expect(screen.getByText(mockMovie.release_date)).toBeInTheDocument()
+    expect(screen.getByText(`${mockMovie.runtime} mins`)).toBeInTheDocument()
+    expect(screen.getByText(`${mockMovie.vote_average}`)).toBeInTheDocument()
+    expect(screen.getByText(`${mockMovie.vote_count}`)).toBeInTheDocument()
   })
 
   test("displays watch providers when available", () => {
     renderWithProviders(<MovieDetails />, {
       popular: [mockMovie],
-      status: "succeeded",
+      requests: {
+        fetchMovieDetails: {
+          status: "succeeded",
+          error: null,
+        },
+        fetchMovies: {
+          status: "idle",
+          error: null,
+        },
+        fetchMovieWatchProviders: {
+          status: "idle",
+          error: null,
+        },
+      },
     })
 
     expect(screen.getByText("Watch Providers")).toBeInTheDocument()
@@ -84,14 +165,27 @@ describe("MovieDetails", () => {
   test("displays movie poster with correct image", () => {
     renderWithProviders(<MovieDetails />, {
       popular: [mockMovie],
-      status: "succeeded",
+      requests: {
+        fetchMovieDetails: {
+          status: "succeeded",
+          error: null,
+        },
+        fetchMovies: {
+          status: "idle",
+          error: null,
+        },
+        fetchMovieWatchProviders: {
+          status: "idle",
+          error: null,
+        },
+      },
     })
 
     const poster = screen.getByAltText(mockMovie.title)
     expect(poster).toBeInTheDocument()
     expect(poster).toHaveAttribute(
       "src",
-      `https://image.tmdb.org/t/p/w300${mockMovie.poster_path}`,
+      `${MOVIE_POSTER_BASE_URL_300}${mockMovie.poster_path}`,
     )
   })
 })

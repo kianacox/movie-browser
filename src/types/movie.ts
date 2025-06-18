@@ -1,5 +1,5 @@
 // API Response Types
-export interface Movie {
+export type Movie = {
   id: number
   title: string
   poster_path: string
@@ -11,7 +11,7 @@ export interface Movie {
   vote_count?: number
 }
 
-export interface MovieList {
+export type MovieList = {
   page: number
   results: Movie[]
   total_pages: number
@@ -20,22 +20,18 @@ export interface MovieList {
 
 export type MovieCategory = "popular" | "top_rated" | "upcoming" | "now_playing"
 
-export interface WatchProvider {
+export type WatchProvider = {
   display_priority: number
   logo_path: string
   provider_id: number
   provider_name: string
 }
-export interface CountryWatchProvider {
+export type CountryWatchProvider = {
   link: string
   flatrate?: WatchProvider[]
-  rent?: WatchProvider[]
-  buy?: WatchProvider[]
 }
 
-export interface WatchProviderResults {
+export type WatchProviderResults = {
   id: number
-  results: {
-    [countryCode: string]: CountryWatchProvider
-  }
+  results: Record<string, CountryWatchProvider>
 }

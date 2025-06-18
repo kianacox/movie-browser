@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom"
-import React, { useEffect } from "react"
+import type React from "react"
+import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import {
   fetchMovieDetails,
@@ -8,12 +9,15 @@ import {
 import "./MovieDetails.css"
 import { Loading } from "../Loading/Loading"
 import { Error } from "./Error/Error"
+import { MOVIE_POSTER_BASE_URL_300 } from "../../constants/MovieConsts"
 
 export const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { status, error } = useAppSelector(state => state.movies)
+  const { status, error } = useAppSelector(
+    state => state.movies.requests.fetchMovieDetails,
+  )
 
   useEffect(() => {
     if (id) {
@@ -41,9 +45,9 @@ export const MovieDetails: React.FC = () => {
 
   if (status === "loading") return <Loading />
   if (error || status === "failed") {
-    return <Error message={error?.toString() || "movie details not found"} />
+    return <Error message={error?.toString() || "Movie details not found"} />
   }
-  if (!movie) return <Error message={"movie details not found"} />
+  if (!movie) return <Error message={"Movie details not found"} />
 
   const {
     title,
@@ -56,7 +60,7 @@ export const MovieDetails: React.FC = () => {
     vote_count,
   } = movie
 
-  const gbProviders = watchProviders?.results?.["GB"]
+  const gbProviders = watchProviders?.results?.GB
   const hasProviders = !!gbProviders?.flatrate
   const convertedVoteAverage = vote_average?.toFixed(1)
 
@@ -70,7 +74,7 @@ export const MovieDetails: React.FC = () => {
       </button>
       <section className="movie-details-card">
         <img
-          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          src={`${MOVIE_POSTER_BASE_URL_300}${poster_path}`}
           alt={title}
           className="movie-details-poster"
         />

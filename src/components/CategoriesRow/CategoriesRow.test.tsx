@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event"
 import { CategoriesRow } from "./CategoriesRow"
 import { renderWithProviders } from "../../test/helpers/RenderWithProvider"
 import { mockMovie } from "../../test/mocks/Movie"
+import { MOVIE_POSTER_BASE_URL_200 } from "../../constants/MovieConsts"
 
 describe("CategoriesRow", () => {
   const mockMovies = [
@@ -17,6 +18,13 @@ describe("CategoriesRow", () => {
     )
 
     expect(screen.getByText("Popular Movies")).toBeInTheDocument()
+  })
+
+  test("renders favourites button for each movie", () => {
+    renderWithProviders(
+      <CategoriesRow title="Popular Movies" movies={mockMovies} />,
+    )
+    expect(screen.getAllByTestId("favourite-button")).toHaveLength(2)
   })
 
   test("displays all movies in the row", () => {
@@ -39,7 +47,7 @@ describe("CategoriesRow", () => {
     posters.forEach((poster, index) => {
       expect(poster).toHaveAttribute(
         "src",
-        `https://image.tmdb.org/t/p/w200${mockMovies[index].poster_path}`,
+        `${MOVIE_POSTER_BASE_URL_200}${mockMovies[index].poster_path}`,
       )
       expect(poster).toHaveAttribute("alt", mockMovies[index].title)
     })
@@ -49,6 +57,8 @@ describe("CategoriesRow", () => {
     renderWithProviders(
       <CategoriesRow title="Popular Movies" movies={mockMovies} />,
       {},
+      { history: [] },
+      { favourites: [] },
       { route: "/" },
     )
 
@@ -65,7 +75,6 @@ describe("CategoriesRow", () => {
     const firstMovieLink = screen.getByRole("link", { name: /movie 1/i })
     await user.click(firstMovieLink)
 
-    console.log("store", store.getState())
     expect(store.getState().history.history).toContainEqual(mockMovies[0])
   })
 })

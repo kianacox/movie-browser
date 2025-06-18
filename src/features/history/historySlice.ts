@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { HistoryState } from "./types"
+import type { HistoryState } from "./types"
 
 const initialState: HistoryState = {
   history: [],

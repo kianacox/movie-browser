@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { MovieCategory } from "../../types/movie"
+import type { MovieCategory } from "../../types/movie"
 import { createMovieService } from "../../services/api/movieService"
 
 const movieService = createMovieService()

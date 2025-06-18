@@ -7,10 +7,16 @@ import { store, persistor } from "./app/store"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "./index.css"
 import { Loading } from "./components/Loading/Loading"
+import { Navigation } from "./components/Navigation/Navigation"
 
 const container = document.getElementById("root")
+
 const MovieDetails = lazy(
   () => import("./components/MovieDetails/MovieDetails"),
+)
+
+const FavouritesGrid = lazy(
+  () => import("./components/Favourites/FavouritesGrid"),
 )
 
 if (container) {
@@ -19,12 +25,14 @@ if (container) {
   root.render(
     <StrictMode>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
           <BrowserRouter>
+            <Navigation />
             <Suspense fallback={<Loading />}>
               <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/details/:id" element={<MovieDetails />} />
+                <Route path="/favourites" element={<FavouritesGrid />} />
               </Routes>
             </Suspense>
           </BrowserRouter>
