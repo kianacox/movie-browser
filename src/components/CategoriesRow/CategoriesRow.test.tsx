@@ -53,7 +53,7 @@ describe("CategoriesRow", () => {
     })
   })
 
-  test("navigates to movie details when a movie is clicked", async () => {
+  test("navigates to movie details when a movie is clicked", () => {
     renderWithProviders(
       <CategoriesRow title="Popular Movies" movies={mockMovies} />,
       {},
@@ -63,7 +63,10 @@ describe("CategoriesRow", () => {
     )
 
     const link = screen.getByRole("link", { name: /Movie 1/i })
-    expect(link).toHaveAttribute("href", "/details/1")
+    expect(link).toHaveAttribute(
+      "href",
+      `/details/${mockMovies[0].id.toString()}`,
+    )
   })
 
   test("adds movie to history when clicked", async () => {

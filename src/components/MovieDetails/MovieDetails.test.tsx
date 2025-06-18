@@ -8,10 +8,7 @@ import { MOVIE_POSTER_BASE_URL_300 } from "../../constants/MovieConsts"
 
 describe("MovieDetails", () => {
   vi.mock("react-router-dom", async () => {
-    const actual =
-      await vi.importActual<typeof import("react-router-dom")>(
-        "react-router-dom",
-      )
+    const actual = await vi.importActual("react-router-dom")
     return {
       ...actual,
       useParams: vi.fn(() => ({ id: mockMovie.id.toString() })),
@@ -78,6 +75,7 @@ describe("MovieDetails", () => {
     expect(screen.getByText("Test error message")).toBeInTheDocument()
   })
 
+  // Rewrite to account for the fact that the back button is not a link
   test("navigates back to home when back button is clicked", async () => {
     const user = userEvent.setup()
     renderWithProviders(
@@ -102,7 +100,7 @@ describe("MovieDetails", () => {
       },
       {},
       {},
-      { route: `/movie/${mockMovie.id}` },
+      { route: `/movie/${mockMovie.id.toString()}` },
     )
 
     const backButton = screen.getByRole("button", { name: /back to home/i })
@@ -133,9 +131,15 @@ describe("MovieDetails", () => {
     expect(screen.getByText(mockMovie.title)).toBeInTheDocument()
     expect(screen.getByText(mockMovie.overview)).toBeInTheDocument()
     expect(screen.getByText(mockMovie.release_date)).toBeInTheDocument()
-    expect(screen.getByText(`${mockMovie.runtime} mins`)).toBeInTheDocument()
-    expect(screen.getByText(`${mockMovie.vote_average}`)).toBeInTheDocument()
-    expect(screen.getByText(`${mockMovie.vote_count}`)).toBeInTheDocument()
+    expect(
+      screen.getByText(`${(mockMovie.runtime ?? "").toString()} mins`),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText((mockMovie.vote_average ?? "").toString()),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText((mockMovie.vote_count ?? "").toString()),
+    ).toBeInTheDocument()
   })
 
   test("displays watch providers when available", () => {

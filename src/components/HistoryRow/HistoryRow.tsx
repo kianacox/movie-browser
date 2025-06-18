@@ -25,7 +25,7 @@ export const HistoryRow: React.FC<Props> = ({ history }) => {
           {history.history.map(movie => (
             <div key={movie.id} className="history-card">
               <Link
-                to={`/details/${movie.id}`}
+                to={`/details/${movie.id.toString()}`}
                 onClick={() => dispatch(addToHistory(movie))}
               >
                 <img

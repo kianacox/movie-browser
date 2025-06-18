@@ -18,14 +18,14 @@ export const Home: React.FC = () => {
   const history = useAppSelector(state => state.history)
 
   useEffect(() => {
-    categories.forEach(({ key }) => dispatch(fetchMovies(key)))
+    categories.forEach(({ key }) => void dispatch(fetchMovies(key)))
   }, [dispatch])
 
   return (
     <div className="home-page">
       <HistoryRow history={history} />
       {categories.map(({ key, title }) => (
-        <CategoriesRow key={key} title={title} movies={movies[key] || []} />
+        <CategoriesRow key={key} title={title} movies={movies[key]} />
       ))}
     </div>
   )

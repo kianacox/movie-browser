@@ -16,10 +16,12 @@ export const createMovieService = () => {
       return apiClient.get<MovieList>(`/movie/${category}`)
     },
     async getMovieDetails(id: number): Promise<Movie> {
-      return apiClient.get<Movie>(`/movie/${id}`)
+      return apiClient.get<Movie>(`/movie/${id.toString()}`)
     },
     async getMovieWatchProviders(id: number): Promise<WatchProviderResults> {
-      return apiClient.get<WatchProviderResults>(`/movie/${id}/watch/providers`)
+      return apiClient.get<WatchProviderResults>(
+        `/movie/${id.toString()}/watch/providers`,
+      )
     },
   }
 }

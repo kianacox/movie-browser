@@ -10,6 +10,7 @@ import "./MovieDetails.css"
 import { Loading } from "../Loading/Loading"
 import { Error } from "./Error/Error"
 import { MOVIE_POSTER_BASE_URL_300 } from "../../constants/MovieConsts"
+import type { WatchProvider } from "../../types/movie"
 
 export const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -21,8 +22,8 @@ export const MovieDetails: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchMovieDetails(id))
-      dispatch(fetchMovieWatchProviders(id))
+      void dispatch(fetchMovieDetails(id))
+      void dispatch(fetchMovieWatchProviders(id))
     }
   }, [id, dispatch])
 
@@ -45,7 +46,7 @@ export const MovieDetails: React.FC = () => {
 
   if (status === "loading") return <Loading />
   if (error || status === "failed") {
-    return <Error message={error?.toString() || "Movie details not found"} />
+    return <Error message={error?.toString() ?? "Movie details not found"} />
   }
   if (!movie) return <Error message={"Movie details not found"} />
 
@@ -60,14 +61,14 @@ export const MovieDetails: React.FC = () => {
     vote_count,
   } = movie
 
-  const gbProviders = watchProviders?.results?.GB
-  const hasProviders = !!gbProviders?.flatrate
+  const providers: WatchProvider[] = watchProviders?.results.GB.flatrate ?? []
+
   const convertedVoteAverage = vote_average?.toFixed(1)
 
   return (
     <main className="movie-details-container">
       <button
-        onClick={() => navigate("/")}
+        onClick={() => void navigate("/")}
         className="movie-details-back-button"
       >
         ← Back to Home
@@ -93,11 +94,11 @@ export const MovieDetails: React.FC = () => {
           <p className="movie-details-meta">
             <strong>Vote Count:</strong> {vote_count}
           </p>
-          {hasProviders && (
+          {providers.length > 0 && (
             <article className="movie-providers">
               <h2 className="movie-providers-title">Watch Providers</h2>
               <ul className="movie-providers-list">
-                {gbProviders?.flatrate?.map(provider => (
+                {providers.map((provider: WatchProvider) => (
                   <li key={provider.provider_id}>
                     <img
                       className="movie-provider-logo"

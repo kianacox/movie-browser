@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { HistoryState } from "./types"
+import type { PayloadAction } from "@reduxjs/toolkit"
+import type { Movie } from "../../types/movie"
 
 const initialState: HistoryState = {
   history: [],
@@ -8,7 +10,7 @@ const historySlice = createSlice({
   name: "history",
   initialState,
   reducers: {
-    addToHistory: (state, action) => {
+    addToHistory: (state, action: PayloadAction<Movie>) => {
       const existingMovie = state.history.find(
         movie => movie.id === action.payload.id,
       )

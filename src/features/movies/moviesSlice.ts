@@ -36,7 +36,7 @@ export const moviesSlice = createSlice({
     builder.addCase(fetchMovies.rejected, (state, action) => {
       state.requests.fetchMovies.status = "failed"
       state.requests.fetchMovies.error =
-        action.error.message || "Failed to fetch movies"
+        action.error.message ?? "Failed to fetch movies"
     })
 
     builder.addCase(fetchMovieDetails.pending, state => {
@@ -67,7 +67,7 @@ export const moviesSlice = createSlice({
     builder.addCase(fetchMovieDetails.rejected, (state, action) => {
       state.requests.fetchMovieDetails.status = "failed"
       state.requests.fetchMovieDetails.error =
-        action.error.message || "Failed to fetch details"
+        action.error.message ?? "Failed to fetch details"
     })
 
     builder.addCase(fetchMovieWatchProviders.pending, state => {
@@ -97,7 +97,7 @@ export const moviesSlice = createSlice({
     builder.addCase(fetchMovieWatchProviders.rejected, (state, action) => {
       state.requests.fetchMovieWatchProviders.status = "failed"
       state.requests.fetchMovieWatchProviders.error =
-        action.error.message || "Failed to fetch watch providers"
+        action.error.message ?? "Failed to fetch watch providers"
     })
   },
 })

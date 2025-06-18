@@ -22,7 +22,7 @@ export const CategoriesRow: React.FC<Props> = ({ title, movies }) => {
           {movies.map(movie => (
             <div key={movie.id} className="movie-card">
               <Link
-                to={`/details/${movie.id}`}
+                to={`/details/${movie.id.toString()}`}
                 onClick={() => dispatch(addToHistory(movie))}
               >
                 <img
