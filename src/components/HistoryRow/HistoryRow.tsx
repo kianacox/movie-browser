@@ -1,10 +1,9 @@
 import "./HistoryRow.css"
 import type React from "react"
 import type { HistoryState } from "../../features/history/types"
-import { Link } from "react-router-dom"
-import { addToHistory, clearHistory } from "../../features/history/historySlice"
+import { clearHistory } from "../../features/history/historySlice"
 import { useAppDispatch } from "../../app/hooks"
-import { MOVIE_POSTER_BASE_URL_200 } from "../../constants/MovieConsts"
+import { HistoryCard } from "./HistoryCard/HistoryCard"
 
 type Props = {
   history: HistoryState
@@ -24,19 +23,7 @@ export const HistoryRow: React.FC<Props> = ({ history }) => {
       <div className="history-row">
         <div className="history-row-items">
           {history.history.map(movie => (
-            <div key={movie.id} className="history-card">
-              <Link
-                to={`/details/${movie.id.toString()}`}
-                onClick={() => dispatch(addToHistory(movie))}
-              >
-                <img
-                  src={`${MOVIE_POSTER_BASE_URL_200}${movie.poster_path}`}
-                  alt={movie.title}
-                  className="history-card-poster"
-                />
-              </Link>
-              <p className="history-card-title">{movie.title}</p>
-            </div>
+            <HistoryCard key={movie.id} movie={movie} />
           ))}
         </div>
         <button
