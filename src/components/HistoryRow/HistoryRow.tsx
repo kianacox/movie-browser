@@ -17,10 +17,9 @@ export const HistoryRow: React.FC<Props> = ({ history }) => {
   }
 
   return (
-    <section>
+    <main data-testid="history-row">
       <h2 className="history-row-title">History</h2>
-
-      <div className="history-row">
+      <section className="history-row">
         <div className="history-row-items">
           {history.history.map(movie => (
             <HistoryCard key={movie.id} movie={movie} />
@@ -32,7 +31,7 @@ export const HistoryRow: React.FC<Props> = ({ history }) => {
         >
           Clear History
         </button>
-      </div>
-    </section>
+      </section>
+    </main>
   )
 }
