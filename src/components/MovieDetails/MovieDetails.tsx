@@ -8,7 +8,7 @@ import {
 } from "../../features/movies/moviesThunks"
 import "./MovieDetails.css"
 import { Loading } from "../Loading/Loading"
-import { Error } from "./Error/Error"
+import { Error } from "../Error/Error"
 import {
   MOVIE_POSTER_BASE_URL_200,
   MOVIE_POSTER_BASE_URL_300,

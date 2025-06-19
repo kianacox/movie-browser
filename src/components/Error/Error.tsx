@@ -10,11 +10,11 @@ export const Error: React.FC<{ message: string }> = ({ message }) => {
   }
 
   return (
-    <div className="error-container">
+    <main className="error-container">
       <div className="error">{message}</div>
       <button className="error-button" onClick={clickHandler}>
         Go back to home
       </button>
-    </div>
+    </main>
   )
 }
