@@ -3,7 +3,7 @@ import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { MovieDetails } from "./MovieDetails"
 import { renderWithProviders } from "../../test/helpers/RenderWithProvider"
-import { mockMovie } from "../../test/mocks/Movie"
+import { mockMovie } from "../../test/mocks/Movies"
 import { MOVIE_POSTER_BASE_URL_300 } from "../../constants/MovieConsts"
 
 describe("MovieDetails", () => {

@@ -26,3 +26,9 @@ export const mockMovie: Movie = {
     },
   },
 }
+
+export const mockMovieFavourite: Movie = {
+  ...mockMovie,
+  id: 124,
+  title: "Test Movie Favourite",
+}

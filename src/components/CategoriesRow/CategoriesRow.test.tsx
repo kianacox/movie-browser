@@ -3,7 +3,7 @@ import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { CategoriesRow } from "./CategoriesRow"
 import { renderWithProviders } from "../../test/helpers/RenderWithProvider"
-import { mockMovie } from "../../test/mocks/Movie"
+import { mockMovie } from "../../test/mocks/Movies"
 import { MOVIE_POSTER_BASE_URL_200 } from "../../constants/MovieConsts"
 
 describe("CategoriesRow", () => {

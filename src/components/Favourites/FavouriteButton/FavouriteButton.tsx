@@ -31,8 +31,15 @@ export const FavouriteButton: React.FC<Props> = ({ movie }) => {
       onClick={clickHandler}
       className="favourite-button"
       data-testid="favourite-button"
+      aria-label={isFavourite ? "Remove from favourites" : "Add to favourites"}
     >
-      {isFavourite ? <FaHeart /> : <FaRegHeart />}
+      <span aria-hidden="true">
+        {isFavourite ? (
+          <FaHeart data-testid="heart-filled-icon" />
+        ) : (
+          <FaRegHeart data-testid="heart-empty-icon" />
+        )}
+      </span>
     </button>
   )
 }
