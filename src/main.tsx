@@ -28,13 +28,15 @@ if (container) {
         <PersistGate loading={<Loading />} persistor={persistor}>
           <BrowserRouter>
             <Navigation />
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route path="/" element={<App />} />
-                <Route path="/details/:id" element={<MovieDetails />} />
-                <Route path="/favourites" element={<FavouritesGrid />} />
-              </Routes>
-            </Suspense>
+            <div className="layout-container">
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route path="/" element={<App />} />
+                  <Route path="/details/:id" element={<MovieDetails />} />
+                  <Route path="/favourites" element={<FavouritesGrid />} />
+                </Routes>
+              </Suspense>
+            </div>
           </BrowserRouter>
         </PersistGate>
       </Provider>

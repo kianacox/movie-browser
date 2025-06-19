@@ -9,10 +9,13 @@ import {
 import "./MovieDetails.css"
 import { Loading } from "../Loading/Loading"
 import { Error } from "./Error/Error"
-import { MOVIE_POSTER_BASE_URL_300 } from "../../constants/MovieConsts"
+import {
+  MOVIE_POSTER_BASE_URL_200,
+  MOVIE_POSTER_BASE_URL_300,
+} from "../../constants/MovieConsts"
 import type { WatchProvider } from "../../types/movie"
 
-export const MovieDetails: React.FC = () => {
+const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -103,7 +106,7 @@ export const MovieDetails: React.FC = () => {
                   <li key={provider.provider_id}>
                     <img
                       className="movie-provider-logo"
-                      src={`https://image.tmdb.org/t/p/w200${provider.logo_path}`}
+                      src={`${MOVIE_POSTER_BASE_URL_200}${provider.logo_path}`}
                       alt={provider.provider_name}
                     />
                     {provider.provider_name}

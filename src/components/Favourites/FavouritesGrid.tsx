@@ -4,12 +4,27 @@ import { FavouriteButton } from "./FavouriteButton/FavouriteButton"
 import { Link } from "react-router-dom"
 import { MOVIE_POSTER_BASE_URL_200 } from "../../constants/MovieConsts"
 import "./FavouritesGrid.css"
+import {
+  NO_FAVOURITES_FOUND_MESSAGE,
+  NO_FAVOURITES_FOUND_TITLE,
+} from "../../constants/FavouriteConsts"
 
 const FavouritesGrid: React.FC = () => {
   const dispatch = useAppDispatch()
   const favourites = useAppSelector(state => state.favourites.favourites)
+  const favouritesPopulated = favourites.length > 0
+
+  if (!favouritesPopulated) {
+    return (
+      <section className="no-favourites-found">
+        <h2>{NO_FAVOURITES_FOUND_TITLE}</h2>
+        <p>{NO_FAVOURITES_FOUND_MESSAGE}</p>
+      </section>
+    )
+  }
+
   return (
-    <div className="favourites-grid">
+    <section className="favourites-grid" data-testid="favourites-grid">
       {favourites.map(movie => (
         <div key={movie.id} className="movie-card">
           <Link
@@ -28,7 +43,7 @@ const FavouritesGrid: React.FC = () => {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   )
 }
 
