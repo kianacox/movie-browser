@@ -1,4 +1,4 @@
-import { MoviesState } from "./types"
+import type { MoviesState } from "./types"
 
 export const initialMoviesState: MoviesState = {
   popular: [],
