@@ -4,6 +4,7 @@ import type { HistoryState } from "../../features/history/types"
 import { Link } from "react-router-dom"
 import { addToHistory, clearHistory } from "../../features/history/historySlice"
 import { useAppDispatch } from "../../app/hooks"
+import { MOVIE_POSTER_BASE_URL_200 } from "../../constants/MovieConsts"
 
 type Props = {
   history: HistoryState
@@ -29,7 +30,7 @@ export const HistoryRow: React.FC<Props> = ({ history }) => {
                 onClick={() => dispatch(addToHistory(movie))}
               >
                 <img
-                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  src={`${MOVIE_POSTER_BASE_URL_200}${movie.poster_path}`}
                   alt={movie.title}
                   className="history-card-poster"
                 />
