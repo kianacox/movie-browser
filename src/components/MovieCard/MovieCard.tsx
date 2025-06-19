@@ -14,7 +14,7 @@ export const MovieCard: React.FC<props> = ({ movie }) => {
   const dispatch = useAppDispatch()
 
   return (
-    <section className="movie-card">
+    <section className="movie-card" data-testid="movie-card">
       <Link
         to={`/details/${movie.id.toString()}`}
         onClick={() => dispatch(addToHistory(movie))}

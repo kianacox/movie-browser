@@ -1,8 +1,9 @@
 import { test, expect } from "vitest"
-import { render } from "@testing-library/react"
+import { screen } from "@testing-library/react"
 import { Loading } from "./Loading"
+import { renderWithProviders } from "../../test/helpers/RenderWithProvider"
 
 test("renders loading component", () => {
-  const { getByRole } = render(<Loading />)
-  expect(getByRole("main")).toBeInTheDocument()
+  renderWithProviders(<Loading />)
+  expect(screen.getByTestId("loading-spinner")).toBeInTheDocument()
 })
