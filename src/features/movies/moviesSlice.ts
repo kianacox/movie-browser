@@ -5,23 +5,11 @@ import {
   fetchMovieWatchProviders,
 } from "./moviesThunks"
 import type { MovieCategory } from "../../types/movie"
-import type { MoviesState } from "./types"
-
-const initialState: MoviesState = {
-  popular: [],
-  top_rated: [],
-  upcoming: [],
-  now_playing: [],
-  requests: {
-    fetchMovies: { status: "idle", error: null },
-    fetchMovieDetails: { status: "idle", error: null },
-    fetchMovieWatchProviders: { status: "idle", error: null },
-  },
-}
+import { initialMoviesState } from "./sliceState"
 
 export const moviesSlice = createSlice({
   name: "movies",
-  initialState,
+  initialState: initialMoviesState,
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchMovies.pending, state => {
@@ -35,6 +23,7 @@ export const moviesSlice = createSlice({
     })
     builder.addCase(fetchMovies.rejected, (state, action) => {
       state.requests.fetchMovies.status = "failed"
+      console.log(action.error)
       state.requests.fetchMovies.error =
         action.error.message ?? "Failed to fetch movies"
     })

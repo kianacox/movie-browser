@@ -7,29 +7,11 @@ import type { HistoryState } from "../../features/history/types"
 import { historyReducer } from "../../features/history/historySlice"
 import type { FavouritesState } from "../../features/favourites/types"
 import { favouritesReducer } from "../../features/favourites/favouritesSlice"
+import { initialMoviesState } from "../../features/movies/sliceState"
 
 const mockMoviesReducer = (state = defaultMoviesState) => state
 
-const defaultMoviesState: MoviesState = {
-  popular: [],
-  top_rated: [],
-  upcoming: [],
-  now_playing: [],
-  requests: {
-    fetchMovies: {
-      status: "idle",
-      error: null,
-    },
-    fetchMovieDetails: {
-      status: "idle",
-      error: null,
-    },
-    fetchMovieWatchProviders: {
-      status: "idle",
-      error: null,
-    },
-  },
-}
+const defaultMoviesState: MoviesState = initialMoviesState
 
 const defaultHistoryState: HistoryState = {
   history: [],

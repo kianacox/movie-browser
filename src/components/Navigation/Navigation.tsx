@@ -4,7 +4,7 @@ import "./Navigation.css"
 export const Navigation: React.FC = () => {
   return (
     <nav className="navigation">
-      <div className="navigation-content">
+      <section className="navigation-content">
         <h1 className="navigation-title">Movie Browser</h1>
         <ul className="navigation-list">
           <li className="navigation-item">
@@ -29,7 +29,7 @@ export const Navigation: React.FC = () => {
             </NavLink>
           </li>
         </ul>
-      </div>
+      </section>
     </nav>
   )
 }

@@ -27,6 +27,7 @@ const handleError = (error: unknown) => {
       request?: unknown
     }
     if (err.response) {
+      console.log(err.response)
       return createApiError(err.response.status, err.response.data)
     }
     if (err.request) {
