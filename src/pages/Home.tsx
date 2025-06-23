@@ -28,7 +28,7 @@ export const Home: React.FC = () => {
   }, [dispatch])
 
   if (status === "loading") return <Loading />
-  if (status === "failed") return <Error message={error ?? ""} />
+  if (status === "failed") return <Error message={error?.toString() ?? ""} />
 
   return (
     <div className="home-page">

@@ -47,7 +47,7 @@ const MovieDetails: React.FC = () => {
   }, [movies, id])
 
   if (status === "loading") return <Loading />
-  if (error || status === "failed") {
+  if (error) {
     return <Error message={error?.toString() ?? "Movie details not found"} />
   }
   if (!movie) return <Error message={"Movie details not found"} />
