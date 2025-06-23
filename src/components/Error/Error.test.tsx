@@ -14,7 +14,13 @@ describe("Error", () => {
   })
 
   test("shows a button to navigate back to home", () => {
-    renderWithProviders(<Error message={errorMessage} />)
+    renderWithProviders(
+      <Error message={errorMessage} />,
+      {},
+      {},
+      {},
+      { route: "/favourites" },
+    )
 
     const backButton = screen.getByRole("button", { name: /go back to home/i })
     expect(backButton).toBeInTheDocument()
@@ -22,7 +28,13 @@ describe("Error", () => {
 
   test("button is clickable", async () => {
     const user = userEvent.setup()
-    renderWithProviders(<Error message={errorMessage} />)
+    renderWithProviders(
+      <Error message={errorMessage} />,
+      {},
+      {},
+      {},
+      { route: "/favourites" },
+    )
 
     const backButton = screen.getByRole("button", { name: /go back to home/i })
     expect(backButton).toBeEnabled()
