@@ -95,6 +95,28 @@ Movie Browser uses Redux Toolkit for state management. The store is organized in
 - Node.js v18+
 - npm v9+
 
+## API Key Setup
+
+This project uses The Movie Database (TMDB) API. You need your own API key to run the app locally.
+
+### Get a TMDB API Key
+
+1. Go to [https://www.themoviedb.org/](https://www.themoviedb.org/)
+2. Create a free account (or log in if you have one)
+3. Navigate to your account settings > API > Request an API Key
+4. Follow the instructions to obtain your key
+
+### Set Up Your .env File
+
+1. In the project root, create a file named `.env`
+2. Add the following line, replacing `YOUR_API_KEY` with your TMDB key:
+   ```env
+   VITE_TMDB_API_KEY=YOUR_API_KEY
+   ```
+3. Save the file. Restart the dev server if it's running.
+
+Your API key will now be used for all TMDB requests.
+
 ## Setup
 
 1. Clone the repo:
