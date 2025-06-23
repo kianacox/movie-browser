@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { memo } from "react"
 import type { Movie } from "../../../types/movie"
 import { addToHistory } from "../../../features/history/historySlice"
 import { MOVIE_POSTER_BASE_URL_200 } from "../../../constants/MovieConsts"
@@ -8,7 +9,7 @@ import "./HistoryCard.css"
 type props = {
   movie: Movie
 }
-export const HistoryCard: React.FC<props> = ({ movie }) => {
+export const HistoryCard: React.FC<props> = memo(({ movie }) => {
   const dispatch = useAppDispatch()
 
   return (
@@ -26,4 +27,4 @@ export const HistoryCard: React.FC<props> = ({ movie }) => {
       <p className="history-card-title">{movie.title}</p>
     </section>
   )
-}
+})

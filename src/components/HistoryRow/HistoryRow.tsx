@@ -1,6 +1,7 @@
 import "./HistoryRow.css"
 import type React from "react"
 import type { HistoryState } from "../../features/history/types"
+import { memo } from "react"
 import { clearHistory } from "../../features/history/historySlice"
 import { useAppDispatch } from "../../app/hooks"
 import { HistoryCard } from "./HistoryCard/HistoryCard"
@@ -9,7 +10,7 @@ type Props = {
   history: HistoryState
 }
 
-export const HistoryRow: React.FC<Props> = ({ history }) => {
+export const HistoryRow: React.FC<Props> = memo(({ history }) => {
   const dispatch = useAppDispatch()
 
   if (history.history.length === 0) {
@@ -34,4 +35,4 @@ export const HistoryRow: React.FC<Props> = ({ history }) => {
       </section>
     </main>
   )
-}
+})

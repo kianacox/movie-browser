@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { memo } from "react"
 import type { Movie } from "../../types/movie"
 import { useAppDispatch } from "../../app/hooks"
 import { addToHistory } from "../../features/history/historySlice"
@@ -10,7 +11,7 @@ type props = {
   movie: Movie
 }
 
-export const MovieCard: React.FC<props> = ({ movie }) => {
+export const MovieCard: React.FC<props> = memo(({ movie }) => {
   const dispatch = useAppDispatch()
 
   return (
@@ -31,4 +32,4 @@ export const MovieCard: React.FC<props> = ({ movie }) => {
       </footer>
     </section>
   )
-}
+})

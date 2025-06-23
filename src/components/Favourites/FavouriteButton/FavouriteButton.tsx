@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useAppDispatch, useAppSelector } from "../../../app/hooks"
 import {
   addToFavourites,
@@ -11,7 +12,7 @@ type Props = {
   movie: Movie
 }
 
-export const FavouriteButton: React.FC<Props> = ({ movie }) => {
+export const FavouriteButton: React.FC<Props> = memo(({ movie }) => {
   const dispatch = useAppDispatch()
   const favourites = useAppSelector(state => state.favourites.favourites)
   const isFavourite = favourites.some(
@@ -42,4 +43,4 @@ export const FavouriteButton: React.FC<Props> = ({ movie }) => {
       </span>
     </button>
   )
-}
+})

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom"
 import type React from "react"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import {
   fetchMovieDetails,
@@ -22,6 +22,7 @@ const MovieDetails: React.FC = () => {
   const { status, error } = useAppSelector(
     state => state.movies.requests.fetchMovieDetails,
   )
+  const movies = useAppSelector(state => state.movies)
 
   useEffect(() => {
     if (id) {
@@ -30,7 +31,7 @@ const MovieDetails: React.FC = () => {
     }
   }, [id, dispatch])
 
-  const movie = useAppSelector(state => {
+  const movie = useMemo(() => {
     const categories = [
       "popular",
       "top_rated",
@@ -39,13 +40,11 @@ const MovieDetails: React.FC = () => {
     ] as const
 
     for (const category of categories) {
-      const found = state.movies[category].find(
-        movie => movie.id.toString() === id,
-      )
+      const found = movies[category].find(movie => movie.id.toString() === id)
       if (found) return found
     }
     return null
-  })
+  }, [movies, id])
 
   if (status === "loading") return <Loading />
   if (error || status === "failed") {

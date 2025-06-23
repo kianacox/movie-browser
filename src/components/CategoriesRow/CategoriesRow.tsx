@@ -1,6 +1,7 @@
 import "./CategoriesRow.css"
 import type React from "react"
 import type { Movie } from "../../types/movie"
+import { memo } from "react"
 import { MovieCard } from "../MovieCard/MovieCard"
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
   movies: Movie[]
 }
 
-export const CategoriesRow: React.FC<Props> = ({ title, movies }) => {
+export const CategoriesRow: React.FC<Props> = memo(({ title, movies }) => {
   return (
     <section>
       <h2 className="movie-row-title">{title}</h2>
@@ -21,4 +22,4 @@ export const CategoriesRow: React.FC<Props> = ({ title, movies }) => {
       </div>
     </section>
   )
-}
+})
