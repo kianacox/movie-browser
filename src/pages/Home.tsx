@@ -31,11 +31,11 @@ export const Home: React.FC = () => {
   if (status === "failed") return <Error message={error?.toString() ?? ""} />
 
   return (
-    <div className="home-page">
+    <main className="home-page" data-testid="home-page">
       <HistoryRow history={history} />
       {categories.map(({ key, title }) => (
         <CategoriesRow key={key} title={title} movies={movies[key]} />
       ))}
-    </div>
+    </main>
   )
 }
