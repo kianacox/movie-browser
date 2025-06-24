@@ -24,6 +24,8 @@ export default defineConfig({
         "**/*.test.ts",
         "**/*.test.tsx",
         "**/*.config.ts",
+        "src/main.tsx",
+        "eslint.config.js",
       ],
     },
   },
