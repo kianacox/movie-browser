@@ -6,6 +6,7 @@ import { CategoriesRow } from "../components/CategoriesRow/CategoriesRow"
 import { HistoryRow } from "../components/HistoryRow/HistoryRow"
 import { Error } from "../components/Error/Error"
 import { Loading } from "../components/Loading/Loading"
+import { SearchBar } from "../components/Search/SearchBar/SearchBar"
 
 const categories = [
   { key: "popular", title: "Popular" },
@@ -32,6 +33,7 @@ export const Home: React.FC = () => {
 
   return (
     <main className="home-page" data-testid="home-page">
+      <SearchBar />
       <HistoryRow history={history} />
       {categories.map(({ key, title }) => (
         <CategoriesRow key={key} title={title} movies={movies[key]} />

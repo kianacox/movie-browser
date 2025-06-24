@@ -37,6 +37,7 @@ const MovieDetails: React.FC = () => {
       "top_rated",
       "upcoming",
       "now_playing",
+      "searched_for",
     ] as const
 
     for (const category of categories) {

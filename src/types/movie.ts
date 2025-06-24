@@ -18,7 +18,12 @@ export type MovieList = {
   total_results: number
 }
 
-export type MovieCategory = "popular" | "top_rated" | "upcoming" | "now_playing"
+export type MovieCategory =
+  | "popular"
+  | "top_rated"
+  | "upcoming"
+  | "now_playing"
+  | "searched_for"
 
 export type WatchProvider = {
   display_priority: number

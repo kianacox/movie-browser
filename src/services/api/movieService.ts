@@ -1,5 +1,3 @@
-// a service which gets movies from all categories
-
 import { createApiClient } from "./client"
 import type {
   Movie,
@@ -22,6 +20,9 @@ export const createMovieService = () => {
       return apiClient.get<WatchProviderResults>(
         `/movie/${id.toString()}/watch/providers`,
       )
+    },
+    async getMovieSearchResults(title: string): Promise<MovieList> {
+      return apiClient.get<MovieList>(`/search/movie?query=${title}`)
     },
   }
 }

@@ -7,6 +7,7 @@ import type { HistoryState } from "../../features/history/types"
 import { historyReducer } from "../../features/history/historySlice"
 import type { FavouritesState } from "../../features/favourites/types"
 import { favouritesReducer } from "../../features/favourites/favouritesSlice"
+import { searchReducer } from "../../features/search/searchSlice"
 import { initialMoviesState } from "../../features/movies/sliceState"
 
 const mockMoviesReducer = (state = defaultMoviesState) => state
@@ -46,6 +47,7 @@ const createMockStore = (
       movies: mockMoviesReducer,
       history: historyReducer,
       favourites: favouritesReducer,
+      search: searchReducer,
     },
     preloadedState,
   })

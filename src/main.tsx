@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "./index.css"
 import { Loading } from "./components/Loading/Loading"
 import { Navigation } from "./components/Navigation/Navigation"
+import SearchResults from "./components/Search/SearchResults/SearchResults"
 
 const container = document.getElementById("root")
 
@@ -34,6 +35,7 @@ if (container) {
                   <Route path="/" element={<App />} />
                   <Route path="/details/:id" element={<MovieDetails />} />
                   <Route path="/favourites" element={<FavouritesGrid />} />
+                  <Route path="/search" element={<SearchResults />} />
                 </Routes>
               </Suspense>
             </div>

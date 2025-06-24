@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import { moviesReducer } from "../features/movies/moviesSlice"
 import { historyReducer } from "../features/history/historySlice"
 import { favouritesReducer } from "../features/favourites/favouritesSlice"
+import { searchReducer } from "../features/search/searchSlice"
 import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 
@@ -41,6 +42,7 @@ export const store = configureStore({
     movies: persistedMoviesReducer,
     history: persistedHistoryReducer,
     favourites: persistedFavouritesReducer,
+    search: searchReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

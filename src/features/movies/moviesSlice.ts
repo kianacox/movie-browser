@@ -4,13 +4,32 @@ import {
   fetchMovieDetails,
   fetchMovieWatchProviders,
 } from "./moviesThunks"
-import type { MovieCategory } from "../../types/movie"
+import type { MovieCategory, Movie } from "../../types/movie"
 import { initialMoviesState } from "./sliceState"
+
+const categories: MovieCategory[] = [
+  "popular",
+  "top_rated",
+  "upcoming",
+  "now_playing",
+  "searched_for",
+]
 
 export const moviesSlice = createSlice({
   name: "movies",
   initialState: initialMoviesState,
-  reducers: {},
+  reducers: {
+    addSearchedForMovies: (state, action) => {
+      const results = action.payload
+      console.log(action.payload)
+      console.log("Adding searched for movies:", results)
+      results.forEach((movie: Movie) => {
+        if (!state.searched_for.some(m => m.id === movie.id)) {
+          state.searched_for.push(movie)
+        }
+      })
+    },
+  },
   extraReducers: builder => {
     builder.addCase(fetchMovies.pending, state => {
       state.requests.fetchMovies.status = "loading"
@@ -37,12 +56,6 @@ export const moviesSlice = createSlice({
       const { id, runtime, vote_average, vote_count } = action.payload.data
       const movieId = id
 
-      const categories: MovieCategory[] = [
-        "popular",
-        "top_rated",
-        "upcoming",
-        "now_playing",
-      ]
       categories.forEach(category => {
         const movie = state[category].find(movie => movie.id === movieId)
         if (movie) {
@@ -68,12 +81,6 @@ export const moviesSlice = createSlice({
       const { data } = action.payload
       const movieId = data.id
 
-      const categories: MovieCategory[] = [
-        "popular",
-        "top_rated",
-        "upcoming",
-        "now_playing",
-      ]
       categories.forEach(category => {
         const movie = state[category].find(movie => movie.id === movieId)
         if (movie) {
@@ -92,3 +99,4 @@ export const moviesSlice = createSlice({
 })
 
 export const moviesReducer = moviesSlice.reducer
+export const { addSearchedForMovies } = moviesSlice.actions

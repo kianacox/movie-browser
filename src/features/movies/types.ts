@@ -2,7 +2,7 @@ import type { Movie } from "../../types/movie"
 
 type RequestStatus = "idle" | "loading" | "succeeded" | "failed"
 
-type RequestState = {
+export type RequestState = {
   status: RequestStatus
   error: string | null
 }
@@ -12,6 +12,7 @@ export type MoviesState = {
   top_rated: Movie[]
   upcoming: Movie[]
   now_playing: Movie[]
+  searched_for: Movie[]
   requests: {
     fetchMovies: RequestState
     fetchMovieDetails: RequestState
