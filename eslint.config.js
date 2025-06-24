@@ -20,7 +20,6 @@ const eslintConfig = config(
       "**/.yarn/",
       "**/coverage/",
       "html/assets/",
-      "vitest.config.ts",
     ],
   },
   {
