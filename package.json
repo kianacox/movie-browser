@@ -16,7 +16,6 @@
     "test:coverage": "vitest run --coverage",
     "test:coverage:report": "vitest run --coverage --reporter=html",
     "type-check": "tsc --noEmit",
-    "eject": "react-scripts eject",
     "prepare": "husky"
   },
   "dependencies": {

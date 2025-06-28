@@ -18,7 +18,9 @@ const SearchResults: React.FC = () => {
   return (
     <main className="search-results">
       {error && <Error message={error} />}
-      {results?.map(movie => <MovieCard key={movie.id} movie={movie} />)}
+      {results.map(movie => (
+        <MovieCard key={movie.id} movie={movie} />
+      ))}
     </main>
   )
 }

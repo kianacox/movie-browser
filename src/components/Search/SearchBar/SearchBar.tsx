@@ -14,7 +14,7 @@ import { addSearchedForMovies } from "../../../features/movies/moviesSlice"
 export const SearchBar: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const query = useAppSelector(state => state.search.query ?? "")
+  const query = useAppSelector(state => state.search.query)
   const searchResults = useAppSelector(state => state.search.results.results)
   const { status } = useAppSelector(state => state.search.request.fetchSearch)
 
@@ -23,19 +23,24 @@ export const SearchBar: React.FC = () => {
     dispatch(updateSearchQuery(query))
   }
 
-  const handleClick = async () => {
-    if (!query.trim()) {
-      return
-    }
-    dispatch(fetchSearchResults(query))
-    dispatch(clearSearchQuery())
-    navigate("/search")
+  const handleClick = () => {
+    if (!query.trim()) return
+
+    void dispatch(fetchSearchResults(query))
+      .unwrap()
+      .then(() => {
+        void navigate("/search")
+        dispatch(clearSearchQuery())
+      })
+      .catch((error: unknown) => {
+        console.error(error)
+        dispatch(clearSearchQuery())
+      })
   }
 
   useEffect(() => {
-    if (!searchResults || searchResults.length === 0) {
-      return
-    }
+    if (searchResults.length === 0) return
+
     dispatch(addSearchedForMovies(searchResults))
   }, [dispatch, searchResults])
 

@@ -1,3 +1,4 @@
+import type { PayloadAction } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
 import {
   fetchMovies,
@@ -19,10 +20,8 @@ export const moviesSlice = createSlice({
   name: "movies",
   initialState: initialMoviesState,
   reducers: {
-    addSearchedForMovies: (state, action) => {
-      const results = action.payload
-      console.log(action.payload)
-      console.log("Adding searched for movies:", results)
+    addSearchedForMovies: (state, action: PayloadAction<Movie[]>) => {
+      const results: Movie[] = action.payload
       results.forEach((movie: Movie) => {
         if (!state.searched_for.some(m => m.id === movie.id)) {
           state.searched_for.push(movie)
@@ -42,7 +41,6 @@ export const moviesSlice = createSlice({
     })
     builder.addCase(fetchMovies.rejected, (state, action) => {
       state.requests.fetchMovies.status = "failed"
-      console.log(action.error)
       state.requests.fetchMovies.error =
         action.error.message ?? "Failed to fetch movies"
     })
