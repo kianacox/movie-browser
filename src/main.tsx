@@ -9,6 +9,7 @@ import "./index.css"
 import { Loading } from "./components/Loading/Loading"
 import { Navigation } from "./components/Navigation/Navigation"
 import SearchResults from "./components/Search/SearchResults/SearchResults"
+import { Analytics } from "@vercel/analytics/react"
 
 const container = document.getElementById("root")
 
@@ -25,6 +26,7 @@ if (container) {
 
   root.render(
     <StrictMode>
+      <Analytics />
       <Provider store={store}>
         <PersistGate loading={<Loading />} persistor={persistor}>
           <BrowserRouter>
